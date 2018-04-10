@@ -2,6 +2,7 @@
 var numero0 = 0;
 numero1 = 0;
 operador = 0; // 1 +;2 -;3 *;4 /;
+count = 0;
 
 setDisplay(0);
 function getDisplay() {
@@ -13,9 +14,14 @@ function setDisplay(val) {
 
 document.getElementById("on").onclick = function () {
     setDisplay("0");
+    numero0 = 0;
+    numero1 = 0;
+    operador = 0;
+    count = 0;
 };
 document.getElementById("sign").onclick = function () {
     setDisplay(((parseIntFloat(getDisplay()) * -1) + "").substr(0, 8));
+    count = 0;
 };
 document.getElementById("raiz").onclick = function () {
     alert("Metodo no implementado.");
@@ -24,6 +30,7 @@ document.getElementById("dividido").onclick = function () {
     operador = 4;
     numero0 = parseIntFloat(getDisplay());
     setDisplay("");
+    count = 0;
 };
 
 document.getElementById("7").onclick = function () {
@@ -39,6 +46,7 @@ document.getElementById("por").onclick = function () {
     operador = 3;
     numero0 = parseIntFloat(getDisplay());
     setDisplay("");
+    count = 0;
 };
 
 document.getElementById("4").onclick = function () {
@@ -54,6 +62,7 @@ document.getElementById("menos").onclick = function () {
     operador = 2;
     numero0 = parseIntFloat(getDisplay());
     setDisplay("");
+    count = 0;
 };
 
 document.getElementById("1").onclick = function () {
@@ -76,8 +85,13 @@ document.getElementById("punto").onclick = function () {
     }
 };
 document.getElementById("igual").onclick = function () {
+    count = count + 1;
     var result = 0;
-    numero1 = parseIntFloat(getDisplay());
+    if (count > 1) {
+        numero0 = parseIntFloat(getDisplay());
+    } else {
+        numero1 = parseIntFloat(getDisplay());
+    }
     switch (operador) {
         case 1:
             result = numero0 + numero1; break;
@@ -95,9 +109,11 @@ document.getElementById("mas").onclick = function () {
     operador = 1;
     numero0 = parseIntFloat(getDisplay());
     setDisplay("");
+    count = 0;
 };
 
 function addNumber(value) {
+    count = 0;
     var number = parseIntFloat(getDisplay());
     if (number == 0) {
         if (getDisplay().indexOf(".") > 0) {
